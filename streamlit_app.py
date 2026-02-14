@@ -54,7 +54,7 @@ if uploaded_file is not None:
         ax1.set_ylabel("No of Days")
         ax1.set_title("Demand Distribution Histogram")
 
-        st.pyplot(fig1, width='content')
+        st.pyplot(fig1, use_container_width=False)
 
         # ==============================
         # DESCRIPTIVE STATISTICS
