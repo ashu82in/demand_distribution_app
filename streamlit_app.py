@@ -48,7 +48,7 @@ if uploaded_file is not None:
 
         bins = st.slider("Select Number of Bins", 5, 50, 15)
 
-        fig1, ax1 = plt.subplots(figsize=(6,4))
+        fig1, ax1 = plt.subplots(figsize=(8,4))
         ax1.hist(demand_data, bins=bins)
         ax1.set_xlabel("Demand")
         ax1.set_ylabel("No of Days")
