@@ -126,8 +126,11 @@ if uploaded_file is not None:
             value=10
         )
 
+
         df["Rolling_Demand"] = df[column].rolling(window=n_days).sum()
         rolling_df = df.dropna(subset=["Rolling_Demand"])
+
+        
 
         fig2, ax2 = plt.subplots()
 
@@ -141,6 +144,26 @@ if uploaded_file is not None:
         ax2.set_title(f"Rolling {n_days}-Day Demand")
 
         st.pyplot(fig2)
+
+        # ==============================
+        # ROLLING DATA TABLE
+        # ==============================
+        st.subheader(f"📋 {n_days}-Day Rolling Demand Data Table")
+        
+        # Select and rename columns for a cleaner display
+        display_df = rolling_df[["Date", column, "Rolling_Demand"]].copy()
+        display_df.columns = ["Date", "Daily Demand", f"Rolling {n_days}-Day Total"]
+
+        st.dataframe(display_df, use_container_width=True)
+
+        # Optional: Add a download button for the calculated data
+        csv = display_df.to_csv(index=False).encode('utf-8')
+        st.download_button(
+            label="Download Rolling Data as CSV",
+            data=csv,
+            file_name=f"rolling_{n_days}day_demand.csv",
+            mime="text/csv",
+        )
 
         # ==============================
         # OPTIONAL: ROLLING DISTRIBUTION
